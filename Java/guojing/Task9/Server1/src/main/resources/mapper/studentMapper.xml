@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTDMapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ptteng.dao.StudentDao">
+
+    <resultMap id="studentMap" type="com.ptteng.entity.Student">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="password" property="password"/>
+        <result column="tel" property="tel"/>
+        <result column="mail" property="mail"/>
+        <result column="photo" property="photo"/>
+        <result column="classify_id" property="classifyId"/>
+        <result column="type" property="type"/>
+        <result column="position" property="position"/>
+        <result column="introduction" property="introduction"/>
+        <result column="create_at" property="createAt"/>
+        <result column="update_at" property="updateAt"/>
+        <result column="create_by" property="createBy"/>
+        <result column="update_by" property="updateBy"/>
+    </resultMap>
+
+
+    <select id="findStudent" resultMap="studentMap">
+            select * from student order by salary desc limit 4
+    </select>
+
+
+    <select id="countStudent" resultType="Long">
+        select count(*) from student
+        <if test="classifyId !=null">
+            where classify_id=#{classifyId}
+        </if>
+    </select>
+
+    <select id="login" resultMap="studentMap">
+            select name,password,tel,mail from student where name=#{name}
+    </select>
+
+
+    <insert id="register" useGeneratedKeys="true" keyProperty="id" parameterType="com.ptteng.entity.Student">
+        insert into student
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name !=null and name !=''">
+                name,
+            </if>
+            <if test="password !=null and password !=''">
+                password,
+            </if>
+            <if test="tel !=null and tel !=''">
+                tel,
+            </if>
+            <if test="mail !=null and mail !=''">
+                mail,
+            </if>
+            <if test="photo !=null and photo !=''">
+                photo,
+            </if>
+            <if test="classifyId !=null and classifyId !=''">
+                classify_id,
+            </if>
+            <if test="type !=null and type !=''">
+                type,
+            </if>
+            <if test="position !=null and position !=''">
+                position,
+            </if>
+            <if test="introduction !=null and introduction !=''">
+                introduction,
+            </if>
+            <if test="createAt !=null and createAt !=''">
+                create_at,
+            </if>
+            <if test="updateAt !=null and updateAt !=''">
+                update_at,
+            </if>
+            <if test="createBy !=null and createBy !=''">
+                create_by,
+            </if>
+            <if test="updateBy !=null and updateBy !=''">
+                update_by,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name !=null and name !=''">
+                #{name},
+            </if>
+            <if test="password !=null and password !=''">
+                #{password},
+            </if>
+            <if test="tel !=null and tel !=''">
+                #{tel},
+            </if>
+            <if test="mail !=null and mail !=''">
+                #{mail},
+            </if>
+            <if test="photo !=null and photo !=''">
+                #{photo},
+            </if>
+            <if test="classifyId !=null and classifyId !=''">
+                #{classifyId},
+            </if>
+            <if test="type !=null and type !=''">
+                #{type},
+            </if>
+            <if test="position !=null and position !=''">
+                #{position},
+            </if>
+            <if test="introduction !=null and introduction !=''">
+                #{introduction},
+            </if>
+            <if test="createAt !=null and createAt !=''">
+                #{createAt},
+            </if>
+            <if test="updateAt !=null and updateAt !=''">
+                #{updateAt},
+            </if>
+            <if test="createBy !=null and createBy !=''">
+                #{createBy},
+            </if>
+            <if test="updateBy !=null and updateBy !=''">
+                #{updateBy},
+            </if>
+        </trim>
+    </insert>
+
+
+
+
+    <update id="updateStudent" parameterType="com.ptteng.entity.Student">
+        update student
+        <trim prefix="set" suffixOverrides=",">
+            <if test="password !=null and password !=''">
+                password=#{password},
+            </if>
+            <if test="tel !=null and tel !=''">
+                tel=#{tel},
+            </if>
+            <if test="mail !=null and mail !=''">
+                mail=name=#{mail},
+            </if>
+            <if test="photo !=null and photo !=''">
+                photo=#{photo},
+            </if>
+            <if test="classifyId !=null and classifyId !=''">
+                classify_id=#{classifyId},
+            </if>
+            <if test="type !=null and type !=''">
+                type=#{type},
+            </if>
+            <if test="position !=null and position !=''">
+                position=#{position},
+            </if>
+            <if test="introduction !=null and introduction !=''">
+                introduction=#{introduction},
+            </if>
+            <if test="createAt !=null and createAt !=''">
+                create_at=#{createAt},
+            </if>
+            <if test="updateAt !=null and updateAt !=''">
+                update_at=#{updateAt},
+            </if>
+            <if test="createBy !=null and createBy !=''">
+                create_by=#{createBy},
+            </if>
+            <if test="updateBy !=null and updateBy !=''">
+                update_by=#{updateBy},
+            </if>
+        </trim>
+        where name=#{name}
+    </update>
+
+
+</mapper>

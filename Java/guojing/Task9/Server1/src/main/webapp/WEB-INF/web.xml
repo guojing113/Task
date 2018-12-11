@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+         http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+
+  <!--这个是可有可无的，只是一个名称-->
+  <display-name>Archetype Created Web Application</display-name>
+
+
+  <!--直接加载composite文件-->
+  <!--<filter>-->
+  <!--<filter-name>tuscany</filter-name>-->
+  <!--<filter-class>org.apache.tuscany.sca.host.webapp.TuscanyServletFilter</filter-class>-->
+  <!--</filter>-->
+  <!--<filter-mapping>-->
+  <!--<filter-name>tuscany</filter-name>-->
+  <!--<url-pattern>/*</url-pattern>-->
+  <!--</filter-mapping>-->
+
+
+  <!-- 加载spring的配置文件-->
+  <!-- ContextLoaderListener监听器：监听Web容器，一旦启动，自动装配ApplicationContext的配置信息 -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
+  <!-- 告知ApplicationContext的位置在哪，如果不配置，默认去/WEB-INF目录下找 -->
+  <!-- 如果是监听多个文件，可用‘,’隔开 -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:ApplicationContext.xml</param-value>
+  </context-param>
+
+  <listener>
+    <listener-class>com.ptteng.util.Listener</listener-class>
+  </listener>
+
+
+</web-app>

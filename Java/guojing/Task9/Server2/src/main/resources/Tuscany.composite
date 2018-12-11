@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 这里的头文件是需要手动配置的 -->
+<!--这里注意命名空间需要加上接口的路径，后面的name必须要有，但是好像随便一个名字就可以-->
+<composite xmlns="http://docs.oasis-open.org/ns/opencsa/sca/200912"
+           xmlns:tuscany="http://tuscany.apache.org/xmlns/sca/1.1"
+           targetNamespace="http://com.ptteng.service"
+           name="service">
+
+    <component name="ServiceComponent">
+        <implementation.spring location="ApplicationContext.xml"/>
+        <!--service标签用于配置SCA服务-->
+        <!--这里的name属性要和Spring配置文件中的<sca:service 里的name属性保持一致 。-->
+        <service name="professionService">
+            <interface.java interface="com.ptteng.service.ProfessionService"/>
+            <tuscany:binding.rmi uri="rmi://101.132.189.148:11134/professionService"/>
+        </service>
+
+        <service name="companyService">
+            <interface.java interface="com.ptteng.service.CompanyService"/>
+            <tuscany:binding.rmi uri="rmi://101.132.189.148:11134/companyService"/>
+        </service>
+
+        <service name="studentService">
+            <interface.java interface="com.ptteng.service.StudentService"/>
+            <tuscany:binding.rmi uri="rmi://101.132.189.148:11134/studentService"/>
+        </service>
+
+    </component>
+
+
+
+
+</composite>
