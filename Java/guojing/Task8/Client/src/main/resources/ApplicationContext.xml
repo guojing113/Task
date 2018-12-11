@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 自动扫描 -->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.ptteng.controller"/>
+    <context:component-scan base-package="com.ptteng.util.API"/>
+    <context:component-scan base-package="com.ptteng.server"/>
+
+
+    <!--<property name="serviceUrl" value="rmi://101.132.189.148:1021/companyService"/>-->
+
+    <!--服务端为server-->
+    <bean name="companyService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://101.132.189.148:1021/companyService"/>
+        <property name="serviceInterface" value="com.ptteng.service.CompanyService"/>
+        <property name="lookupStubOnStartup" value="false"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+
+    <bean name="professionService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://101.132.189.148:1021/professionService"/>
+        <property name="serviceInterface" value="com.ptteng.service.ProfessionService"/>
+        <property name="lookupStubOnStartup" value="false"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+
+    <bean name="studentService" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://101.132.189.148:1021/studentService"/>
+        <property name="serviceInterface" value="com.ptteng.service.StudentService"/>
+        <property name="lookupStubOnStartup" value="false"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+
+    <!--服务端为server1-->
+    <bean name="companyService1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://101.132.189.148:1022/companyService1"/>
+        <property name="serviceInterface" value="com.ptteng.service.CompanyService"/>
+        <property name="lookupStubOnStartup" value="false"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+
+    <bean name="professionService1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://101.132.189.148:1022/professionService1"/>
+        <property name="serviceInterface" value="com.ptteng.service.ProfessionService"/>
+        <property name="lookupStubOnStartup" value="false"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+
+    <bean name="studentService1" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceUrl" value="rmi://101.132.189.148:1022/studentService1"/>
+        <property name="serviceInterface" value="com.ptteng.service.StudentService"/>
+        <property name="lookupStubOnStartup" value="false"/>
+        <property name="refreshStubOnConnectFailure" value="true"/>
+    </bean>
+
+    <!-- 引入外置资源文件 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:oss.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--constructor-arg和property区别，constructor-arg是通过构造方法注入属性，property是通过get、set方法注入属性-->
+    <bean id="NoteVerifyUtil" class="com.ptteng.util.API.NoteVerifyUtil">
+        <constructor-arg name="serverIp" value="app.cloopen.com"/>
+        <constructor-arg name="serverPort" value="8883"/>
+        <constructor-arg name="accountSid" value="8aaf070866e70c450166f15bcd84097a"/>
+        <constructor-arg name="accountToken" value="1b3442b667844d23a872c87d81b83e32"/>
+        <constructor-arg name="appId" value="8aaf070866e70c450166f15bcdd30980"/>
+        <constructor-arg name="templateId" value="1"/>
+        <constructor-arg name="time" value="2"/>
+    </bean>
+
+    <!--sendCloud的相关配置-->
+    <bean id="SendCloudUtil" class="com.ptteng.util.API.SendCloudUtil">
+        <constructor-arg name="url" value="http://api.sendcloud.net/apiv2/mail/send"/>
+        <constructor-arg name="apiUser" value="yixiaoyixiaonian_test_UIURNk"/>
+        <constructor-arg name="apiKey" value="RR1wLgGm9VYYAhJy"/>
+        <constructor-arg name="fromName" value="tomcat.com"/>
+        <constructor-arg name="from" value="service@sendcloud.im"/>
+        <constructor-arg name="subject" value="你二大爷告诉你"/>
+    </bean>
+
+
+    <!--引入阿里云的oss配置文件-->
+    <import resource="classpath:oss.xml"/>
+    <import resource="classpath:cos.xml"/>
+    <!--<import resource="classpath:applicationContext-rmi-client.xml"/>-->
+
+
+</beans>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--这里是阿里云ossClient的属性配置-->
+    <bean id="COSClientUtil" class="com.ptteng.util.API.COSClientUtil">
+        <constructor-arg name="secretId" value="AKID8A3mQxXl3Xv9VXdApPgu2zM6nJk9cTQF"/>
+        <constructor-arg name="secretKey" value="ptLeoodIoAoOp7FCKSVWfx5KPMAEAwb3"/>
+        <constructor-arg name="region" value="ap-beijing"/>
+        <constructor-arg name="bucketName" value="pttengguojing-1258171018"/>
+    </bean>
+
+
+</beans>
